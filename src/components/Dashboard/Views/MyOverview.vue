@@ -1,27 +1,11 @@
 <template>
   <div>
-
-    <!--Stats cards-->
-    <div class="row">
-      <div class="col-lg-3 col-sm-6" v-for="stats in statsCards">
-        <stats-card>
-          <div class="icon-big text-center" :class="`icon-${stats.type}`" slot="header">
-            <i :class="stats.icon"></i>
-          </div>
-          <div class="numbers" slot="content">
-            <p>{{stats.title}}</p>
-            {{stats.value}}
-          </div>
-          <div class="stats" slot="footer">
-            <i :class="stats.footerIcon"></i> {{stats.footerText}}
-          </div>
-        </stats-card>
-      </div>
-    </div>
-
     <!--Charts-->
     <div class="row">
 
+      <highcharts :options="options" ref="highcharts"></highcharts>
+      
+      
       <div class="col-xs-12">
         <chart-card :chart-data="usersChart.data" :chart-options="usersChart.options">
           <h4 class="title" slot="title">Users behavior</h4>
@@ -36,33 +20,6 @@
         </chart-card>
       </div>
 
-      <div class="col-md-6 col-xs-12">
-        <chart-card :chart-data="preferencesChart.data"  chart-type="Pie">
-          <h4 class="title" slot="title">Email Statistics</h4>
-          <span slot="subTitle"> Last campaign performance</span>
-          <span slot="footer">
-            <i class="ti-timer"></i> Campaign set 2 days ago</span>
-          <div slot="legend">
-            <i class="fa fa-circle text-info"></i> Open
-            <i class="fa fa-circle text-danger"></i> Bounce
-            <i class="fa fa-circle text-warning"></i> Unsubscribe
-          </div>
-        </chart-card>
-      </div>
-
-      <div class="col-md-6 col-xs-12">
-        <chart-card :chart-data="activityChart.data" :chart-options="activityChart.options">
-          <h4 class="title" slot="title">2015 Sales</h4>
-          <span slot="subTitle"> All products including Taxes</span>
-          <span slot="footer">
-            <i class="ti-check"></i> Data information certified</span>
-          <div slot="legend">
-            <i class="fa fa-circle text-info"></i> Tesla Model S
-            <i class="fa fa-circle text-warning"></i> BMW 5 Series
-          </div>
-        </chart-card>
-      </div>
-
     </div>
 
   </div>
@@ -70,50 +27,53 @@
 <script>
   import StatsCard from 'components/UIComponents/Cards/StatsCard.vue'
   import ChartCard from 'components/UIComponents/Cards/ChartCard.vue'
+  import VueHighchartsCard from 'components/UIComponents/Cards/VueHighchartsCard.vue'
+  
+  var options = {
+  title: {
+    text: 'Monthly Average Temperature',
+    x: -20 //center
+  },
+  subtitle: {
+    text: 'Source: WorldClimate.com',
+    x: -20
+  },
+  xAxis: {
+    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+    ]
+  },
+  yAxis: {
+    title: {
+      text: 'Temperature (°C)'
+    },
+    plotLines: [{
+      value: 0,
+      width: 1,
+      color: '#808080'
+    }]
+  },
+  tooltip: {
+    valueSuffix: '°C'
+  },
+  legend: {
+    layout: 'vertical',
+    align: 'right',
+    verticalAlign: 'middle',
+    borderWidth: 0
+  }
+};
   export default {
     components: {
-      StatsCard,
-      ChartCard
+      ChartCard,
+      VueHighchartsCard
     },
     /**
      * Chart data used to render stats, charts. Should be replaced with server data
      */
     data () {
       return {
-        statsCards: [
-          {
-            type: 'warning',
-            icon: 'ti-server',
-            title: 'Capacity',
-            value: '105GB',
-            footerText: 'Updated now',
-            footerIcon: 'ti-reload'
-          },
-          {
-            type: 'success',
-            icon: 'ti-wallet',
-            title: 'Revenue',
-            value: '$1,345',
-            footerText: 'Last day',
-            footerIcon: 'ti-calendar'
-          },
-          {
-            type: 'danger',
-            icon: 'ti-pulse',
-            title: 'Errors',
-            value: '23',
-            footerText: 'In the last hour',
-            footerIcon: 'ti-timer'
-          },
-          {
-            type: 'info',
-            icon: 'ti-twitter-alt',
-            title: 'Followers',
-            value: '+45',
-            footerText: 'Updated now',
-            footerIcon: 'ti-reload'
-          }
-        ],
+      options:options,
         usersChart: {
           data: {
             labels: ['9:00AM', '12:00AM', '3:00PM', '6:00PM', '9:00PM', '12:00PM', '3:00AM', '6:00AM'],
@@ -166,6 +126,7 @@
     }
   }
 
+options.title.text = "hello"
 </script>
 <style>
 
