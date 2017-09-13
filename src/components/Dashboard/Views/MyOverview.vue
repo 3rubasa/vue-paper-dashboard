@@ -125,8 +125,6 @@
       }
     }
   }
-
-options.title.text = "hello"
 </script>
 <style>
 
