@@ -4,39 +4,24 @@ const SidebarStore = {
   showSidebar: false,
   sidebarLinks: [
     {
-      name: 'Dashboard',
+      name: 'Overview',
       icon: 'ti-panel',
       path: '/admin/overview'
     },
     {
-      name: 'User Profile',
-      icon: 'ti-user',
-      path: '/admin/stats'
-    },
-    {
-      name: 'Table List',
+      name: 'Report',
       icon: 'ti-view-list-alt',
-      path: '/admin/table-list'
+      path: '/admin/report'
     },
     {
-      name: 'Typography',
-      icon: 'ti-text',
-      path: '/admin/typography'
-    },
-    {
-      name: 'Icons',
+      name: 'Data Entry',
       icon: 'ti-pencil-alt2',
-      path: '/admin/icons'
+      path: '/admin/data-entry'
     },
     {
-      name: 'Maps',
-      icon: 'ti-map',
-      path: '/admin/maps'
-    },
-    {
-      name: 'Notifications',
-      icon: 'ti-bell',
-      path: '/admin/notifications'
+      name: 'My Overview',
+      icon: 'ti-pencil-alt2',
+      path: '/admin/my-overview'
     }
   ],
   displaySidebar (value) {
