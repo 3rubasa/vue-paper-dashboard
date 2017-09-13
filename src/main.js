@@ -17,6 +17,7 @@ import Chartist from 'chartist'
 import 'bootstrap/dist/css/bootstrap.css'
 import './assets/sass/paper-dashboard.scss'
 import 'es6-promise/auto'
+import './assets/js/axios.min.js'
 
 // plugin setup
 Vue.use(VueRouter)
