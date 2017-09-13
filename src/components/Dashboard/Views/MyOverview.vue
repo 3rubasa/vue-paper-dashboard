@@ -28,7 +28,9 @@
   import StatsCard from 'components/UIComponents/Cards/StatsCard.vue'
   import ChartCard from 'components/UIComponents/Cards/ChartCard.vue'
   import VueHighchartsCard from 'components/UIComponents/Cards/VueHighchartsCard.vue'
-  
+   
+   var axios = require('axios')
+ 
   var options = {
   title: {
     text: 'Monthly Average Temperature',
@@ -97,32 +99,31 @@
             showLine: true,
             showPoint: false
           }
-        },
-        activityChart: {
-          data: {
-            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-            series: [
-              [542, 543, 520, 680, 653, 753, 326, 434, 568, 610, 756, 895],
-              [230, 293, 380, 480, 503, 553, 600, 664, 698, 710, 736, 795]
-            ]
-          },
-          options: {
-            seriesBarDistance: 10,
-            axisX: {
-              showGrid: false
-            },
-            height: '245px'
-          }
-        },
-        preferencesChart: {
-          data: {
-            labels: ['62%', '32%', '6%'],
-            series: [62, 32, 6]
-          },
-          options: {}
         }
-
       }
+    },
+    
+    mounted: function() {
+      var chart = this.$refs.highcharts.chart;
+		//chart.hideNoData();
+		//chart.showNoData("Loading data...");
+		
+		var vm = this;
+		var chart = vm.$refs.highcharts.chart;
+		
+        axios.get('http://localhost:8000/chart-data')
+          .then(function (response) {
+				var chart = vm.$refs.highcharts.chart;
+				response.data.series.forEach(function(element) {
+					chart.addSeries(element, false);
+				});
+			
+				//chart.hideNoData();
+				chart.redraw();
+          })
+          .catch(function (error) {
+            //chart.showNoData("Error: Failed to load chart data!");
+          })
     }
   }
 </script>
