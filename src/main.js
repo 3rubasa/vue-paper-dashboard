@@ -7,6 +7,7 @@ import GlobalComponents from './gloablComponents'
 import Notifications from './components/UIComponents/NotificationPlugin'
 import SideBar from './components/UIComponents/SidebarPlugin'
 import App from './App'
+import VueHighcharts from './assets/js/vue-highcharts.js'
 
 // router setup
 import routes from './routes/routes'
@@ -23,6 +24,7 @@ Vue.use(GlobalComponents)
 Vue.use(vClickOutside)
 Vue.use(Notifications)
 Vue.use(SideBar)
+Vue.use(VueHighcharts)
 
 // configure router
 const router = new VueRouter({
